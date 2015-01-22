@@ -1,0 +1,6 @@
+<% nest_level =  nest_level ? nest_level + 1 : 1%>
+<%= link_to page.title, project_wiki_page_path(@project.id, page.id) , {class: "nested-#{nest_level}"}%>
+<br>
+<% if page.children.present? %>
+    <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level} %>
+<% end %>
