@@ -53,6 +53,10 @@ $(function(){
 
         setContentClasses();
 
+        $('.main-collapser').live('click', function(){
+            $('.sidebar-wrapper').toggle();
+        })
+
         $('.collapser').live('click', function(){
             var lvl = $(this).data('nest-level');
             parent_id = $(this).data('parent-id');

@@ -2,11 +2,15 @@
 <% css_class = cookies[page.id] %>
 
 <% if css_class == "opened" || !css_class %>
-    <% val = '-' %>
+    <% val = "-" %>
 <% elsif css_class == "closed" %>
     <% val = "+" %>
 <% end %>
-<span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:18px;"><%= val %></span>
+<% if page.children.present? %>
+
+<span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:18px;width: 8px;display: inline-block;"><%= val %></span>
+
+<% end %>
 
 <%= link_to page.title, project_wiki_page_path(@project, page.title) , {class: "nested-#{nest_level} #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
 
