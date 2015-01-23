@@ -37,9 +37,12 @@ $(function(){
         project_id = $('form').first().attr('action').replace( /\/projects\//, '' );
         project_id = project_id.replace( /\/search/, '' );
 
+        arr = window.location.href.split("/");
+        id = arr[arr.length - 1];
+
         $.ajax({
             url: "/wiki_tree.js",
-            data: {project_id: project_id},
+            data: {project_id: project_id, id: id},
             dataType: 'script',
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 console.log('error while loading wiki pages');

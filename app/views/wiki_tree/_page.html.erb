@@ -7,11 +7,16 @@
     <% val = "+" %>
 <% end %>
 <span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:18px;"><%= val %></span>
-<%= link_to page.title, project_wiki_page_path(@project.id, page.id) , {class: "nested-#{nest_level}", data: {:parent => page.id}}%>
+<% title.freeze %>
+
+<% p page.title %>
+
+<% p '#####' %>
+<%= link_to page.title, project_wiki_page_path(@project, page.title) , {class: "nested-#{nest_level} #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
 
 <br>
 <% if page.children.present? %>
     <div class="nest-wrapper-<%= page.id %> <%= css_class || 'opened' %>">
-    <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level} %>
+    <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level, title: title} %>
     </div>
 <% end %>

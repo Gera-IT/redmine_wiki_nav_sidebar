@@ -10,6 +10,9 @@
     display: none;
 }
 
+.current_wiki_page{
+    font-weight: bold;
+}
 
 #hideleftSidebarButton:hover {
     cursor: pointer;

@@ -3,6 +3,7 @@ class WikiTreeController < ApplicationController
   before_filter :find_project
 
   def index
+    @title = params[:id]
     @pages = WikiPage.where(:parent_id => nil).all
     respond_to do |format|
       format.js
