@@ -5,7 +5,7 @@ Redmine::Plugin.register :redmine_wiki_nav_sidebar do
   name 'Redmine Wiki nav sidebar plugin'
   author 'Alex Sinelnikov'
   description 'Tree Like structure for wiki pages with sidebar'
-  version '1.0b'
+  version '1.0'
   url 'https://github.com/Gera-IT/redmine_wiki_nav_sidebar'
   author_url 'https://github.com/avdept'
   settings :default => {'enabled_sidebar' => true}, :partial => 'settings/sidebar_setting'
