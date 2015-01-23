@@ -4,7 +4,7 @@ class WikiTreeController < ApplicationController
 
   def index
     @title = params[:id]
-    @pages = WikiPage.where(:parent_id => nil).all
+    @pages = @project.wiki.pages.where(:parent_id => nil).all
     respond_to do |format|
       format.js
     end

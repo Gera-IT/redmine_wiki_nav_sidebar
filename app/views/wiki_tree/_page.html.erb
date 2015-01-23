@@ -7,11 +7,7 @@
     <% val = "+" %>
 <% end %>
 <span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:18px;"><%= val %></span>
-<% title.freeze %>
 
-<% p page.title %>
-
-<% p '#####' %>
 <%= link_to page.title, project_wiki_page_path(@project, page.title) , {class: "nested-#{nest_level} #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
 
 <br>
