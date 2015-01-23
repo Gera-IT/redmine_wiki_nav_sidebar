@@ -54,8 +54,11 @@ $(function(){
         setContentClasses();
 
         $('.main-collapser').live('click', function(){
-            $('.sidebar-wrapper').toggle();
-        })
+            if ( $('.sidebar-wrapper').css('visibility') == 'hidden' )
+                $('.sidebar-wrapper').css('visibility','visible');
+            else
+                $('.sidebar-wrapper').css('visibility','hidden');
+        });
 
         $('.collapser').live('click', function(){
             var lvl = $(this).data('nest-level');
