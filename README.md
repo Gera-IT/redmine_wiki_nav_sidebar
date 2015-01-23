@@ -16,6 +16,6 @@ Due to redmine layout structure - there are only 2 pieces - main content & sideb
 To add support for your theme - go to `app/views/wiki_tree/_styles.html.erb` and add your css code. Class `.content-opened` adds to `#container` when sidebar is hidden, and `.content-closed` only when sidebar is visible. Most likely you will have to add css to these classes too.
 
 
-#Contributing
+###Contributing
 
 If you have found some bugs, or added some new css for another theme, submit pull request.
