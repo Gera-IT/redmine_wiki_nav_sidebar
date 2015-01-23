@@ -1,6 +1,17 @@
 <% nest_level =  nest_level ? nest_level + 1 : 1%>
-<%= link_to page.title, project_wiki_page_path(@project.id, page.id) , {class: "nested-#{nest_level}"}%>
+<% css_class = cookies[page.id] %>
+
+<% if css_class == "opened" || !css_class %>
+    <% val = '-' %>
+<% elsif css_class == "closed" %>
+    <% val = "+" %>
+<% end %>
+<span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:18px;"><%= val %></span>
+<%= link_to page.title, project_wiki_page_path(@project.id, page.id) , {class: "nested-#{nest_level}", data: {:parent => page.id}}%>
+
 <br>
 <% if page.children.present? %>
+    <div class="nest-wrapper-<%= page.id %> <%= css_class || 'opened' %>">
     <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level} %>
+    </div>
 <% end %>

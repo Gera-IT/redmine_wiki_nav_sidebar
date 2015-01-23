@@ -1,3 +1,25 @@
 
+<% if Setting.plugin_redmine_wiki_nav_sidebar["enabled_sidebar"] == '1' %>
+
+$('body').append('<%= j render partial: 'styles' %>');
+
+$('#main').prepend('<div id="left_sidebar"><h3>Wiki Pages</h3></div>');
+
+$('#content').append('<div id="left-sidebarHandler"><div id="hideleftSidebarButton" onclick="hideLeftSideBar()" class=""></div></div>');
 
 $('#left_sidebar').append('<%= j render partial: 'page', collection: @pages%>');
+
+
+
+
+<% if cookies["left_sidebar_hide"] == "hide" %>
+$(function() {
+    hideLeftSideBar();
+        });
+<% end %>
+
+<% else %>
+
+
+
+<% end %>

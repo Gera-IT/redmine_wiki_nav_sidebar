@@ -1,29 +1,15 @@
 require 'assets_hook'
 require 'redmine'
 
-
-
-
 Redmine::Plugin.register :redmine_wiki_nav_sidebar do
-  name 'Redmine inline issues edit plugin'
+  name 'Redmine Wiki nav sidebar plugin'
   author 'Alex Sinelnikov'
-  description 'Inline edit for fields on tasks list'
+  description 'Tree Like structure for wiki pages with sidebar'
   version '1.0b'
-  url 'https://github.com/avdept/redmine_edit_issues_inline'
+  url 'https://github.com/Gera-IT/redmine_wiki_nav_sidebar'
   author_url 'https://github.com/avdept'
-
-  # settings :default => {'inline_issues_information' => '1'}, :partial => 'settings/inline_information'
-  # settings :default => {'enable_inline_edit' => '1'}, :partial => 'settings/inline_information'
-  #
-  # project_module :inline_edit do
-  #   permission :allow_inline_edit, :issues_inline => :update_inline
-  # end
-
-
-
-
+  settings :default => {'enabled_sidebar' => true}, :partial => 'settings/sidebar_setting'
 end
-
 
 class FilesHook < Redmine::Hook::ViewListener
   def view_layouts_base_html_head(context = { })
