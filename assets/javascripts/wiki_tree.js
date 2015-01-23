@@ -37,7 +37,8 @@ $(function(){
         project_id = $('form').first().attr('action').replace( /\/projects\//, '' );
         project_id = project_id.replace( /\/search/, '' );
 
-        arr = window.location.href.split("/");
+        arr = window.location.href.replace("/edit", "");
+        arr = arr.split("/");
         id = arr[arr.length - 1];
 
         $.ajax({
