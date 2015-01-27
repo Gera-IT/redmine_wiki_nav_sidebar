@@ -21,7 +21,10 @@ function hideLeftSideBar()
 
 
 function reload(){
-    $('#left_sidebar').css('z-index', '1000');
+    $('#left_sidebar').css('display', 'none');
+    setTimeout(function(){
+        $('#left_sidebar').css('display', 'block');
+    }), 400
 
 }
 
@@ -74,8 +77,10 @@ $(function(){
             console.log($(this).text() == "-");
             if ($(this).text() == "-")
             {
-                $('.nest-wrapper-' + parent_id).addClass('closed');
+                //$('.nest-wrapper-' + parent_id).addClass('closed');
                 $('.nest-wrapper-' + parent_id).removeClass('opened');
+                $( '.nest-wrapper-' + parent_id ).hide( "fast", function() {
+                });
                 $(this).text("+");
                 setCookie(parent_id, 'closed', 100);
                 reload();
@@ -85,8 +90,10 @@ $(function(){
 
             {
 
-                $('.nest-wrapper-' + parent_id).addClass('opened');
+                //$('.nest-wrapper-' + parent_id).addClass('opened');
                 $('.nest-wrapper-' + parent_id).removeClass('closed');
+                $( '.nest-wrapper-' + parent_id ).show( "fast", function() {
+                });
                 setCookie(parent_id, 'opened', 100);
                 $(this).text("-")
                 reload();
