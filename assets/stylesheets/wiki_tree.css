@@ -54,6 +54,9 @@
 }
 
 
+.wiki-link{
+    white-space: nowrap;
+}
 
 .nested-1 {
     margin-left:0px
@@ -73,4 +76,12 @@
 
 .nested-5 {
     margin-left:60px;
+}
+
+.nested-6 {
+    margin-left:80px;
+}
+
+.nested-7 {
+    margin-left:100px;
 }
