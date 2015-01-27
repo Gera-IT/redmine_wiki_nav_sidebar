@@ -20,6 +20,14 @@ function hideLeftSideBar()
 }
 
 
+function reload(){
+    var container = document.getElementsByClassName("sidebar-wrapper");
+    var content = container.innerHTML;
+    container.innerHTML= content;
+}
+
+
+
 function setContentClasses()
 {
     if ($('#left_sidebar').is(':visible')) {
@@ -71,6 +79,7 @@ $(function(){
                 $('.nest-wrapper-' + parent_id).removeClass('opened');
                 $(this).text("+");
                 setCookie(parent_id, 'closed', 100);
+                reload();
             }
 
             else
@@ -81,6 +90,7 @@ $(function(){
                 $('.nest-wrapper-' + parent_id).removeClass('closed');
                 setCookie(parent_id, 'opened', 100);
                 $(this).text("-")
+                reload();
             }
 
             console.log('hi');
