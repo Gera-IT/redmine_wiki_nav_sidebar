@@ -23,7 +23,8 @@
 }
 
 .closed{
-    display:none;
+    height:0px;
+    /*display:none;*/
 }
 
 .opened {
