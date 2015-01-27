@@ -75,10 +75,10 @@ $(function(){
             console.log($(this).text() == "-");
             if ($(this).text() == "-")
             {
-                $('.nest-wrapper-' + parent_id).addClass('tree-closed');
-                $('.nest-wrapper-' + parent_id).removeClass('tree-opened');
+                $('.nest-wrapper-' + parent_id).addClass('closed');
+                $('.nest-wrapper-' + parent_id).removeClass('opened');
                 $(this).text("+");
-                setCookie(parent_id, 'tree-closed', 100);
+                setCookie(parent_id, 'closed', 100);
                 reload();
             }
 
@@ -86,9 +86,9 @@ $(function(){
 
             {
 
-                $('.nest-wrapper-' + parent_id).addClass('tree-opened');
-                $('.nest-wrapper-' + parent_id).removeClass('tree-closed');
-                setCookie(parent_id, 'tree-opened', 100);
+                $('.nest-wrapper-' + parent_id).addClass('opened');
+                $('.nest-wrapper-' + parent_id).removeClass('closed');
+                setCookie(parent_id, 'opened', 100);
                 $(this).text("-")
                 reload();
             }

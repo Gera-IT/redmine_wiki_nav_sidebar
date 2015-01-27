@@ -1,9 +1,9 @@
 <% nest_level =  nest_level ? nest_level + 1 : 1%>
 <% css_class = cookies[page.id] %>
 
-<% if css_class == "tree-opened" || !css_class %>
+<% if css_class == "opened" || !css_class %>
     <% val = "-" %>
-<% elsif css_class == "tree-closed" %>
+<% elsif css_class == "closed" %>
     <% val = "+" %>
 <% end %>
 <% if page.children.present? %>
@@ -16,7 +16,7 @@
 
 <br>
 <% if page.children.present? %>
-    <div class="nest-wrapper-<%= page.id %> <%= css_class || 'tree-opened' %>">
+    <div class="nest-wrapper-<%= page.id %> <%= css_class || 'opened' %>">
     <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level, title: title} %>
     </div>
 <% end %>
