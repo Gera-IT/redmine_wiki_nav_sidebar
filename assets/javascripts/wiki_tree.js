@@ -21,9 +21,8 @@ function hideLeftSideBar()
 
 
 function reload(){
-    var container = document.getElementsByClassName("sidebar-wrapper");
-    var content = container.innerHTML;
-    container.innerHTML= content;
+    $('#left_sidebar').css('display', 'none');
+    $('#left_sidebar').css('display', 'block');
 }
 
 
