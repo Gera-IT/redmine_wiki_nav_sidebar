@@ -21,8 +21,8 @@ function hideLeftSideBar()
 
 
 function reload(){
-    $('#left_sidebar').css('display', 'none');
-    $('#left_sidebar').css('display', 'block');
+    $('#left_sidebar').css('z-index', '1000');
+
 }
 
 
