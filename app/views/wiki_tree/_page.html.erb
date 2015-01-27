@@ -14,7 +14,7 @@
     <span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:20px;width: 8px;display: inline-block;font-weight:bold;margin-right: 5px;color: grey;"></span>
 <% end %>
 
-<%= link_to truncate(page.pretty_title, lenth:33, separator: " ", omission:"..."), project_wiki_page_path(@project, page.title) , {class: "wiki-link nested-#{nest_level} #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
+<%= link_to truncate(page.pretty_title, lenth:50, separator: " ", omission:"..."), project_wiki_page_path(@project, page.title) , {class: "wiki-link nested-#{nest_level} #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
 
 <br>
 <% if page.children.present? %>
