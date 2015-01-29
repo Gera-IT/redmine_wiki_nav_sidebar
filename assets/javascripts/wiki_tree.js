@@ -42,7 +42,7 @@ function setContentClasses()
 }
 $(function(){
 
-    if (window.location.href.indexOf("wiki") > -1)
+    if ((window.location.href.indexOf("wiki") > -1) && !(window.location.href.indexOf("history") > -1) )
     {
         project_id = $('form').first().attr('action').replace( /\/projects\//, '' );
         project_id = project_id.replace( /\/search/, '' );
@@ -77,7 +77,6 @@ $(function(){
             console.log($(this).text() == "-");
             if ($(this).text() == "-")
             {
-                //$('.nest-wrapper-' + parent_id).addClass('closed');
                 $('.nest-wrapper-' + parent_id).removeClass('opened');
                 $( '.nest-wrapper-' + parent_id ).hide( "fast", function() {
                 });
@@ -85,12 +84,8 @@ $(function(){
                 setCookie(parent_id, 'closed', 100);
                 reload();
             }
-
             else
-
             {
-
-                //$('.nest-wrapper-' + parent_id).addClass('opened');
                 $('.nest-wrapper-' + parent_id).removeClass('closed');
                 $( '.nest-wrapper-' + parent_id ).show( "fast", function() {
                 });
@@ -98,15 +93,50 @@ $(function(){
                 $(this).text("-")
                 reload();
             }
-
-            console.log('hi');
         })
+    }
+
+    else if ((window.location.href.indexOf("history") > -1))
+    {
+        //project_id = $('form').first().attr('action').replace( /\/projects\//, '' );
+        //project_id = project_id.replace( /\/search/, '' );
+        //
+        //arr = window.location.href.replace("/history", "");
+        //arr = arr.split("/");
+        //id = arr[arr.length - 1];
+        //console.log('history mode')
+        //$.ajax({
+        //    url: "/wiki_history.js",
+        //    data: {project_id: project_id, id: id},
+        //    dataType: 'script',
+        //    error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //        console.log('error while loading wiki pages');
+        //        $('#left_sidebar').remove();
+        //    }
+        //});
     }
 
 
 
 });
 
+function submit_diff_form()
+{
+    var form = $('.sidebar-wrapper').find('form');
+
+        form.submit(function (ev) {
+            $.ajax({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (data) {
+                    alert('ok');
+                }
+            });
+
+            ev.preventDefault();
+        });
+}
 
 function setCookie(c_name, value, exdays) {
     var exdate = new Date();
