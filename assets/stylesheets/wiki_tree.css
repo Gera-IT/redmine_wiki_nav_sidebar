@@ -53,6 +53,31 @@
     z-index: 11;
 }
 
+.table-ui{
+    border:none!important;
+}
+
+.table-ui td{
+    border:none!important
+}
+
+.table-ui td.updated_on{
+    text-align:left!important;
+}
+
+.table-ui .id {
+    vertical-align: middle;
+}
+
+.table-ui .id a{
+    margin-top: 3px;
+    display: inline-block;
+}
+
+.table-ui .checkbox {
+    vertical-align: middle;
+}
+
 
 .wiki-link{
     white-space: nowrap;
