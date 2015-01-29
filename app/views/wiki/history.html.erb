@@ -35,6 +35,12 @@
           ZeroClipboard.config( { swfPath: "http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf", trustedDomains: ["*"], forceEnhancedClipboard: true } );
           var client = new ZeroClipboard($('.copy-diff-link'));
           $('#wiki-diff-form').submit();
+
+
+          $('.checkbox input').on('change', function(){
+              $('#wiki-diff-form').submit();
+          })
+
           $('.copy-diff-link').click(function (e) {
               if ($(this).attr('data-clicks') == 1)
               {
