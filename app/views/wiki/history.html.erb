@@ -36,45 +36,22 @@
     <span class="pagination"><%= pagination_links_full @version_pages, @version_count %></span>
 <% end %>
 
-
-
     <script>
-
-
-
-
-
       $(document).ready(function(){
           ZeroClipboard.config( { swfPath: "http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf", trustedDomains: ["*"], forceEnhancedClipboard: true } );
-
           var client = new ZeroClipboard($('.copy-diff-link'));
-
           $('#wiki-diff-form').submit();
-
           $('.copy-diff-link').click(function (e) {
               if ($(this).attr('data-clicks') == 1)
               {
                   return false
               }
-
               $(this).attr('data-clicks', 1);
               e.preventDefault();
               $(this).attr('href', window.location.origin + $(this).attr('href') + '&version=' + $('#wiki-diff-form').find('input[name=version]:checked').val());
-
-
               client.clip( $(this) );
-
               client.setText($(this).attr('href'));
-
-//              client.on( 'copy', function(event) {
-//                  event.clipboardData.setData('text/plain', event.target.innerHTML);
-//              } );
-              console.log($(this).attr('href'))
-
-          })
-//          client.addEventListener('mousedown', function (e) {
-//              client.setText(e.target.innerHTML);
-//          });
+          });
       });
 
 

@@ -1,7 +1,5 @@
 <% content_for :sidebar do %>
 
-
-
 <%= form_tag({:controller => 'wiki_tree', :action => 'wiki_diff',
               :project_id => @page.project, :id => @page.title},
              :method => :get, remote: true) do %>

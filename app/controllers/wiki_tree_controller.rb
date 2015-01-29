@@ -30,7 +30,9 @@ class WikiTreeController < ApplicationController
   end
 
   def wiki_diff
-    @page = WikiPage.find_by_title(params[:id])
+    @wiki = @project.wiki
+    @page = @wiki.find_or_new_page(params[:id])
+    # @page = WikiPage.find_by_title(params[:id])
     @diff = @page.diff(params[:version], params[:version_from])
     respond_to do |format|
       format.js
