@@ -1,5 +1,12 @@
 <% content_for :sidebar do %>
     <h3>Page Versions</h3>
+
+    <label for="q">
+      Diff Link
+    </label>
+
+    <input accesskey="f" class="small" name="diff-link" size="20" type="text" id="diff-link" style="width:73%;" disabled>
+
     <%= form_tag({:controller => 'wiki_tree', :action => 'wiki_diff',
               :project_id => @page.project, :id => @page.title},
              :method => :get, remote: true, id: "wiki-diff-form") do %>
@@ -16,7 +23,7 @@
             <p>by <%= link_to_user ver.author %></p>
               <p><%=h ver.comments %></p>
               <p>
-                <%= link_to 'Direct Diff', "/projects/#{@page.project.identifier}/wiki/#{@page.title}/diff?version_from=#{ver.version}", {class: "copy-diff-link", data: {:"data-clipboard-text" => "qwerty"}} %>
+                <%#= link_to 'Direct Diff', "/projects/#{@page.project.identifier}/wiki/#{@page.title}/diff?version_from=#{ver.version}", {class: "copy-diff-link", data: {:"data-clipboard-text" => "qwerty"}} %>
                 <%= link_to l(:button_annotate), :action => 'annotate', :controller => "wiki", :project_id => @page.project.identifier, :id => @page.title, :version => ver.version %>
                 <%= delete_link wiki_page_path(@page, :version => ver.version) if User.current.allowed_to?(:delete_wiki_pages, @page.project) && @version_count > 1 %>
               </p>
@@ -26,32 +33,41 @@
       <% end %>
       </tbody>
     </table>
-    <%= submit_tag l(:label_view_diff), :class => 'small' if show_diff %>
-    <span class="pagination"><%= pagination_links_full @version_pages, @version_count %></span>
 <% end %>
 
     <script>
       $(document).ready(function(){
-          ZeroClipboard.config( { swfPath: "http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf", trustedDomains: ["*"], forceEnhancedClipboard: true } );
-          var client = new ZeroClipboard($('.copy-diff-link'));
+//          ZeroClipboard.config( { swfPath: "http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf", trustedDomains: ["*"], forceEnhancedClipboard: true } );
+//          var client = new ZeroClipboard($('.copy-diff-link'));
           $('#wiki-diff-form').submit();
 
 
-          $('.checkbox input').on('change', function(){
-              $('#wiki-diff-form').submit();
-          })
+          fill_diff_link();
 
-          $('.copy-diff-link').click(function (e) {
-              if ($(this).attr('data-clicks') == 1)
-              {
-                  return false
-              }
-              $(this).attr('data-clicks', 1);
-              e.preventDefault();
-              $(this).attr('href', window.location.origin + $(this).attr('href') + '&version=' + $('#wiki-diff-form').find('input[name=version]:checked').val());
-              client.clip( $(this) );
-              client.setText($(this).attr('href'));
+
+          $('.checkbox input').on('change', function(){
+
+              $('#wiki-diff-form').submit();
+              fill_diff_link();
           });
+
+          $('#content').height($('#sidebar').height());
+
+//          $('.copy-diff-link').click(function (e) {
+//              if ($(this).attr('data-clicks') == 1)
+//              {
+//                  return false
+//              }
+//              $(this).attr('data-clicks', 1);
+//              e.preventDefault();
+//              $(this).attr('href', window.location.origin + $(this).attr('href') + '&version=' + $('#wiki-diff-form').find('input[name=version]:checked').val());
+//              client.clip( $(this) );
+//              client.setText($(this).attr('href'));
+//          })
+          function fill_diff_link()
+          {
+              $('#diff-link').val(window.location.origin + $('#wiki-diff-form').attr('action') + '?' + $('#wiki-diff-form').serialize())
+          }
       });
 
 
