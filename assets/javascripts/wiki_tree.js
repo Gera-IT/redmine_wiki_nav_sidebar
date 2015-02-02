@@ -39,7 +39,44 @@ function setContentClasses()
         $('#content').addClass('content-closed');
         $('#content').removeClass('content-opened');
     }
+
 }
+
+function setCollapseState()
+{
+    if ($('.main-collapser').attr('data-collapse-state') == "opened")
+    {
+        $.each($('.sidebar-wrapper > div'), function(ind, el) {
+            $(el).addClass("closed");
+            $(el).removeClass("opened");
+            var id = $(el).attr('class').split("-")[2].split(" ")[0];
+            parent_link = $('*[data-parent-id='+ id + ']');
+            if (parent_link)
+            {
+                $(parent_link).html('+')
+            }
+
+            $('.main-collapser').attr('data-collapse-state', 'closed');
+            setCookie('collapse-state', 'closed', 100);
+        });
+    }
+    else
+    {
+        $.each($('.sidebar-wrapper > div'), function(ind, el) {
+            $(el).addClass("opened");
+            $(el).removeClass("closed");
+            var id = $(el).attr('class').split("-")[2].split(" ")[0];
+            parent_link = $('*[data-parent-id='+ id + ']');
+            if (parent_link)
+            {
+                $(parent_link).html('-')
+            }
+            $('.main-collapser').attr('data-collapse-state', 'opened');
+            setCookie('collapse-state', 'opened', 100);
+        });
+    }
+}
+
 $(function(){
 
     if ((window.location.href.indexOf("wiki") > -1) && !(window.location.href.indexOf("history") > -1) )
@@ -63,11 +100,10 @@ $(function(){
 
         setContentClasses();
 
+        //setCollapseState();
+
         $('.main-collapser').live('click', function(){
-            if ( $('.sidebar-wrapper').css('visibility') == 'hidden' )
-                $('.sidebar-wrapper').css('visibility','visible');
-            else
-                $('.sidebar-wrapper').css('visibility','hidden');
+            setCollapseState();
         });
 
         $('.collapser').live('click', function(){
@@ -98,22 +134,6 @@ $(function(){
 
     else if ((window.location.href.indexOf("history") > -1))
     {
-        //project_id = $('form').first().attr('action').replace( /\/projects\//, '' );
-        //project_id = project_id.replace( /\/search/, '' );
-        //
-        //arr = window.location.href.replace("/history", "");
-        //arr = arr.split("/");
-        //id = arr[arr.length - 1];
-        //console.log('history mode')
-        //$.ajax({
-        //    url: "/wiki_history.js",
-        //    data: {project_id: project_id, id: id},
-        //    dataType: 'script',
-        //    error: function(XMLHttpRequest, textStatus, errorThrown) {
-        //        console.log('error while loading wiki pages');
-        //        $('#left_sidebar').remove();
-        //    }
-        //});
     }
 
 

@@ -3,11 +3,27 @@
 
 $('body').append('<%= j render partial: 'styles' %>');
 
-$('#main').prepend('<div id="left_sidebar"><h3>Wiki Pages<span class="main-collapser" style="font-size: 12px;font-weight: normal;margin-left: 18px;">Collapse/show all</span> </h3><div class="sidebar-wrapper"></div></div>');
+$('#main').prepend('<div id="left_sidebar"><h3>Wiki Pages<span class="main-collapser" data-collapse-state="<%= j (cookies["collapse-state"] || 'opened') %>" style="font-size: 12px;font-weight: normal;margin-left: 18px;">Collapse/show all</span> </h3><div class="sidebar-wrapper"></div></div>');
 
 $('#content').append('<div id="left-sidebarHandler"><div id="hideleftSidebarButton" onclick="hideLeftSideBar()" class=""></div></div>');
 
 $('.sidebar-wrapper').append('<%= j render partial: 'page', collection: @pages, locals: {project_id: @project.id, title: @title}%>');
+
+
+
+<% if cookies["collapse-state"] == "closed" %>
+
+$.each($('.sidebar-wrapper > div'), function(ind, el) {
+    $(el).addClass("closed");
+    $(el).removeClass("opened");
+    var id = $(el).attr('class').split("-")[2].split(" ")[0];
+    parent_link = $('*[data-parent-id='+ id + ']');
+    if (parent_link)
+    {
+        $(parent_link).html('+')
+    }
+});
+<% end %>
 
 
 
