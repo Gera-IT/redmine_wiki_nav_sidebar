@@ -55,7 +55,7 @@
           {
               loc = $('#wiki-diff-form').attr('action').split("/")
               loc[loc.length - 1] = 'diff';
-              loc = loc.join("/")
+              loc = loc.join("/");
               $('#diff-link').val(window.location.origin + loc + '?' + $('#wiki-diff-form').serialize())
               $('#direct-diff-link').attr('href', window.location.origin + loc + '?' + $('#wiki-diff-form').serialize())
           }
@@ -69,6 +69,9 @@
 
               }, 2000);
           } );
+          client.on("error", function(e) {
+              console.log(e);
+          });
       });
 
 
