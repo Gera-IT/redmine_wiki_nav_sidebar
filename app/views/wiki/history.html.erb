@@ -1,11 +1,13 @@
 <% content_for :sidebar do %>
     <h3>Page Versions</h3>
 
-    <label for="q">
-      Diff Link
-    </label>
+    <!--<label for="q">-->
+      <!--Diff Link-->
+    <!--</label>-->
 
-    <input accesskey="f" class="small" name="diff-link" size="20" type="text" id="diff-link" style="width:73%;" disabled>
+    <button id="d_clip_button" class="my_clip_button" title="Click me to copy to clipboard." data-clipboard-target="diff-link" style="width:91px;" data-clipboard-text="Default clipboard text from attribute">Copy Diff Link </button>
+    <input accesskey="f" class="small" name="diff-link" size="20" type="text" id="diff-link" style="width:62%;" disabled>
+
 
     <%= form_tag({:controller => 'wiki_tree', :action => 'wiki_diff',
               :project_id => @page.project, :id => @page.title},
@@ -37,14 +39,10 @@
 
     <script>
       $(document).ready(function(){
-//          ZeroClipboard.config( { swfPath: "http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf", trustedDomains: ["*"], forceEnhancedClipboard: true } );
-//          var client = new ZeroClipboard($('.copy-diff-link'));
+          ZeroClipboard.config( { swfPath: "http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf", trustedDomains: ["*"], forceEnhancedClipboard: true } );
+          var client = new ZeroClipboard($('#d_clip_button'));
           $('#wiki-diff-form').submit();
-
-
           fill_diff_link();
-
-
           $('.checkbox input').on('change', function(){
 
               $('#wiki-diff-form').submit();
@@ -52,22 +50,20 @@
           });
 
           $('#content').height($('#sidebar').height());
-
-//          $('.copy-diff-link').click(function (e) {
-//              if ($(this).attr('data-clicks') == 1)
-//              {
-//                  return false
-//              }
-//              $(this).attr('data-clicks', 1);
-//              e.preventDefault();
-//              $(this).attr('href', window.location.origin + $(this).attr('href') + '&version=' + $('#wiki-diff-form').find('input[name=version]:checked').val());
-//              client.clip( $(this) );
-//              client.setText($(this).attr('href'));
-//          })
           function fill_diff_link()
           {
               $('#diff-link').val(window.location.origin + $('#wiki-diff-form').attr('action') + '?' + $('#wiki-diff-form').serialize())
           }
+
+          client.on( 'aftercopy', function(event) {
+              $('#d_clip_button').html('Copied!');
+              $('#d_clip_button').css('color','green');
+              window.setTimeout(function() {
+                  $('#d_clip_button').html('Copy diff link');
+                  $('#d_clip_button').css('color','black');
+
+              }, 2000);
+          } );
       });
 
 
