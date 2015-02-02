@@ -5,8 +5,9 @@
       <!--Diff Link-->
     <!--</label>-->
 
-    <button id="d_clip_button" class="my_clip_button" title="Click me to copy to clipboard." data-clipboard-target="diff-link" style="width:35%;" data-clipboard-text="Default clipboard text from attribute">Copy Diff Link </button>
-    <input accesskey="f" class="small" name="diff-link" size="20" type="text" id="diff-link" style="width:55%;" disabled>
+    <img src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/128/link.png" style="width: 11px; margin-right:-5px;">
+    <button id="d_clip_button" class="my_clip_button" title="Click me to copy to clipboard." data-clipboard-target="diff-link" style="width:32%;" data-clipboard-text="Default clipboard text from attribute">Copy Diff Link </button>
+    <input accesskey="f" class="small" name="diff-link" size="20" type="hidden" id="diff-link" style="width:55%;" disabled>
 
 
     <%= form_tag({:controller => 'wiki_tree', :action => 'wiki_diff',

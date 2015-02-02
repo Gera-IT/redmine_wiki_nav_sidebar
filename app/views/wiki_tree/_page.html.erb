@@ -8,15 +8,22 @@
 <% end %>
 <% if page.children.present? %>
 
-<span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:20px;width: 8px;display: inline-block;font-weight:bold;margin-right: 5px;color: grey;"><%= val %></span>
+<!--<span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%#= page.id%>" style="font-size:20px;width: 8px;display: inline-block;font-weight:bold;margin-right: 5px;color: grey;"><%#= val %></span>-->
 
 <% else %>
-    <span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:20px;width: 8px;display: inline-block;font-weight:bold;margin-right: 5px;color: grey;"></span>
+
 <% end %>
 
-<%= link_to truncate(page.pretty_title, lenth:50, separator: " ", omission:"..."), project_wiki_page_path(@project, page.title) , {class: "wiki-link nested-#{nest_level} #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
+<p class='<%= "nested-#{nest_level}"%>' style="height:15px;">
+<% if page.children.present? %>
+<span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:20px;width: 8px;display: inline-block;font-weight:bold;margin-right: 5px;color: grey;"><%= val %></span>
+<% else %>
+      <span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:20px;width: 8px;display: inline-block;height:22px; font-weight:bold;margin-right: 5px;color: grey;"></span>
+  <% end %>
+<%= link_to truncate(page.pretty_title, lenth:50, separator: " ", omission:"..."), project_wiki_page_path(@project, page.title) , {class: "wiki-link #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
+</p>
 
-<br>
+<!--<br>-->
 <% if page.children.present? %>
     <div class="nest-wrapper-<%= page.id %> <%= css_class || 'opened' %>">
     <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level, title: title} %>

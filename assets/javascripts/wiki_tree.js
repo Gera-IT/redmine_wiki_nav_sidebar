@@ -94,6 +94,8 @@ $(function(){
             dataType: 'script',
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 console.log('error while loading wiki pages');
+                console.log(textStatus);
+                console.log(errorThrown);
                 $('#left_sidebar').remove();
             }
         });

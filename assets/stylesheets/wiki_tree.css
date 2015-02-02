@@ -53,6 +53,20 @@
     z-index: 11;
 }
 
+#d_clip_button{
+    background:none!important;
+    border:none;
+    padding:0!important;
+
+    /*optional*/
+    color:#2996cc;
+    /*text-decoration:underline;*/
+    cursor:pointer;
+    font-size: 14px;
+
+    font-family: "helvetica neue",helvetica,arial,sans-serif;
+}
+
 .table-ui{
     border:none!important;
 }
