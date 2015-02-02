@@ -52,7 +52,10 @@
           $('#content').height($('#sidebar').height());
           function fill_diff_link()
           {
-              $('#diff-link').val(window.location.origin + $('#wiki-diff-form').attr('action') + '?' + $('#wiki-diff-form').serialize())
+              loc = $('#wiki-diff-form').attr('action').split("/")
+              loc[loc.length - 1] = 'diff';
+              loc = loc.join("/")
+              $('#diff-link').val(window.location.origin + loc + '?' + $('#wiki-diff-form').serialize())
           }
 
           client.on( 'aftercopy', function(event) {
