@@ -22,8 +22,8 @@
             <td class="id"><%= link_to h(ver.version), :action => 'show', :id => @page.title, :project_id => @page.project.identifier, :version => ver.version, :controller => "wiki" %></td>
             <td class="checkbox"><%= radio_button_tag('version', ver.version, (line_num==1), :id => "cb-#{line_num}", :onclick => "$('#cbto-#{line_num+1}').attr('checked', true);") if show_diff && (line_num < @versions.size) %></td>
             <td class="checkbox"><%= radio_button_tag('version_from', ver.version, (line_num==2), :id => "cbto-#{line_num}") if show_diff && (line_num > 1) %></td>
-            <td class="updated_on"><p>Updated on <%= format_time(ver.updated_on) %></p>
-            <p>by <%= link_to_user ver.author %></p>
+            <td class="updated_on">
+            <p><%= link_to_user ver.author %> updated <%= content_tag(:abbr, ver.updated_on.to_s, class: 'timeago', :title => ver.updated_on.getutc.iso8601)%></p>
               <p><%=h ver.comments %></p>
               <p>
                 <%#= link_to 'Direct Diff', "/projects/#{@page.project.identifier}/wiki/#{@page.title}/diff?version_from=#{ver.version}", {class: "copy-diff-link", data: {:"data-clipboard-text" => "qwerty"}} %>
@@ -40,6 +40,9 @@
 
     <script>
       $(document).ready(function(){
+
+          jQuery("abbr.timeago").timeago();
+
           ZeroClipboard.config( { swfPath: "http://cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.2.0/ZeroClipboard.swf", trustedDomains: ["*"], forceEnhancedClipboard: true } );
           var client = new ZeroClipboard($('#copy_button'));
           $('#wiki-diff-form').submit();
