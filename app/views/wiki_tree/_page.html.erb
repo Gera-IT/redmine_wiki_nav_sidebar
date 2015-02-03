@@ -3,7 +3,7 @@
 
 <% if css_class == "opened" || !css_class %>
     <% val = "-" %>
-<% elsif css_class == "closed" %>
+<% elsif css_class == "tree-closed" %>
     <% val = "+" %>
 <% end %>
 <% if page.children.present? %>
