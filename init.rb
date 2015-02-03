@@ -11,11 +11,9 @@ Redmine::Plugin.register :redmine_wiki_nav_sidebar do
   settings :default => {'enabled_sidebar' => true}, :partial => 'settings/sidebar_setting'
 end
 
-class FilesHook < Redmine::Hook::ViewListener
+class AssetsFilesHook < Redmine::Hook::ViewListener
   def view_layouts_base_html_head(context = { })
     javascript_include_tag('wiki_tree.js', :plugin => 'redmine_wiki_nav_sidebar') +
-    javascript_include_tag('ZeroClipboard.js', :plugin => 'redmine_wiki_nav_sidebar')+
-    javascript_include_tag('jquery.timeago.js', :plugin => 'redmine_wiki_nav_sidebar')+
         stylesheet_link_tag('wiki_tree.css', :plugin => 'redmine_wiki_nav_sidebar')
   end
 end
