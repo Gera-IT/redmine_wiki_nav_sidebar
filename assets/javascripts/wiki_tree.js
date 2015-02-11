@@ -104,11 +104,11 @@ $(function(){
 
         //setCollapseState();
 
-        $('.main-collapser').live('click', function(){
+        $(document).on('click', '.main-collapser', function(){
             setCollapseState();
         });
 
-        $('.collapser').live('click', function(){
+        $(document).on('click', '.collapser', function(){
             var lvl = $(this).data('nest-level');
             parent_id = $(this).data('parent-id');
             console.log(lvl);
