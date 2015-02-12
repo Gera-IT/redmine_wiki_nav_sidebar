@@ -106,7 +106,7 @@ function setCollapseState()
 
 $(function(){
 
-    if ((window.location.href.indexOf("wiki") > -1) && !(window.location.href.indexOf("history") > -1) )
+    if ((window.location.href.indexOf("/wiki") > -1) && !(window.location.href.indexOf("history") > -1) )
     {
         project_id = $('form').first().attr('action').replace( /\/projects\//, '' );
         project_id = project_id.replace( /\/search/, '' );
