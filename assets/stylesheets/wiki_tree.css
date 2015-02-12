@@ -27,6 +27,10 @@
     display:none;
 }
 
+.opened-sidebar-color{
+    background-color: #fafafa!important;
+}
+
 .opened {
     display:block;
 }
