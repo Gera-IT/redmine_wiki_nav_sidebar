@@ -9,6 +9,9 @@ $('#content').append('<div id="left-sidebarHandler"><div id="hideleftSidebarButt
 
 $('.sidebar-wrapper').append('<ul class="items-list main-list-wrapper"><%= j render partial: 'page', collection: @pages, locals: {project_id: @project.id, title: @title}%></ul>');
 
+$(function(){
+    $('.main-list-wrapper').nestedSortable('serialize', {listType: 'ul', items: 'li'});
+});
 
 
 <% if cookies["collapse-state"] == "closed" %>
