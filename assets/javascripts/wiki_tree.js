@@ -207,3 +207,7 @@ function getCookie(c_name) {
             return unescape(y);
     }
 }
+
+$(function(){
+    $('.main-list-wrapper').nestedSortable('serialize', {listType: 'ul', items: 'li'});
+});

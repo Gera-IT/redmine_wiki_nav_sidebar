@@ -14,18 +14,20 @@
 
 <% end %>
 
-<p class='<%= "nested-#{nest_level}"%>' style="height:15px;">
+<li class='<%= "nested-#{nest_level}"%>' style="min-height:23px;" id="page_<%= page.id%>">
 <% if page.children.present? %>
 <span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:20px;width: 8px;display: inline-block;font-weight:bold;margin-right: 5px;color: grey;"><%= val %></span>
 <% else %>
       <span class="collapser" data-nest-level="<%= nest_level %>" data-parent-id="<%= page.id%>" style="font-size:20px;width: 8px;display: inline-block;height:22px; font-weight:bold;margin-right: 5px;color: grey;"></span>
   <% end %>
 <%= link_to truncate(page.pretty_title, lenth:50, separator: " ", omission:"..."), project_wiki_page_path(@project, page.title) , {class: "wiki-link #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
-</p>
+  <% if page.children.present? %>
+      <ul class="nest-wrapper-<%= page.id %> <%= css_class || 'opened' %> items-list">
+        <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level, title: title} %>
+        <br/>
+      </ul>
+  <% end %>
+</li>
 
 <!--<br>-->
-<% if page.children.present? %>
-    <div class="nest-wrapper-<%= page.id %> <%= css_class || 'opened' %>">
-    <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level, title: title} %>
-    </div>
-<% end %>
+

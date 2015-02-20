@@ -7,7 +7,7 @@ $('#main').prepend('<div id="left_sidebar"><h3>Wiki Pages<span class="main-colla
 
 $('#content').append('<div id="left-sidebarHandler"><div id="hideleftSidebarButton" onclick="hideLeftSideBar()" class=""></div></div>');
 
-$('.sidebar-wrapper').append('<%= j render partial: 'page', collection: @pages, locals: {project_id: @project.id, title: @title}%>');
+$('.sidebar-wrapper').append('<ul class="items-list main-list-wrapper"><%= j render partial: 'page', collection: @pages, locals: {project_id: @project.id, title: @title}%></ul>');
 
 
 

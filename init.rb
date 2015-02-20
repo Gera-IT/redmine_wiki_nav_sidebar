@@ -14,6 +14,7 @@ end
 class AssetsFilesHook < Redmine::Hook::ViewListener
   def view_layouts_base_html_head(context = { })
     javascript_include_tag('wiki_tree.js', :plugin => 'redmine_wiki_nav_sidebar') +
+        javascript_include_tag('jquery.mjs.nestedSortable.js', :plugin => 'redmine_wiki_nav_sidebar') +
         stylesheet_link_tag('wiki_tree.css', :plugin => 'redmine_wiki_nav_sidebar')
   end
 end
