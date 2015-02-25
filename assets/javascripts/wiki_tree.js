@@ -73,12 +73,14 @@ function setCollapseState()
 {
     if ($('.main-collapser').attr('data-collapse-state') == "opened")
     {
-        $.each($('.sidebar-wrapper > div'), function(ind, el) {
-            $(el).addClass("tree-closed");
-            $(el).removeClass("opened");
-            var id = $(el).attr('class').split("-")[2].split(" ")[0];
+        $.each($('.sidebar-wrapper > ul > li'), function(ind, el) {
+            $(el).find('ul').addClass("tree-closed");
+            $(el).find('ul').removeClass("opened");
+            id = $(el);
+            id = id.attr('id').split("_")[1];
+            //var id = $(el).attr('id').split("_")[2].split(" ")[0];
             parent_link = $('*[data-parent-id='+ id + ']');
-            if (parent_link)
+            if (parent_link && $(el).find('ul').size() != 0)
             {
                 $(parent_link).html('+')
             }
@@ -89,12 +91,12 @@ function setCollapseState()
     }
     else
     {
-        $.each($('.sidebar-wrapper > div'), function(ind, el) {
-            $(el).addClass("opened");
-            $(el).removeClass("tree-closed");
-            var id = $(el).attr('class').split("-")[2].split(" ")[0];
+        $.each($('.sidebar-wrapper > ul > li'), function(ind, el) {
+            $(el).find('ul').addClass("opened");
+            $(el).find('ul').removeClass("tree-closed");
+            var id = $(el).attr('id').split("_")[1];
             parent_link = $('*[data-parent-id='+ id + ']');
-            if (parent_link)
+            if (parent_link && $(el).find('ul').size() != 0)
             {
                 $(parent_link).html('-')
             }
