@@ -139,8 +139,7 @@ $(function(){
         $(document).on('click', '.collapser', function(){
             var lvl = $(this).data('nest-level');
             parent_id = $(this).data('parent-id');
-            console.log(lvl);
-            console.log($(this).text() == "-");
+
             if ($(this).text() == "-")
             {
                 $('.nest-wrapper-' + parent_id).removeClass('opened');

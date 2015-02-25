@@ -1,0 +1,25 @@
+$('.sidebar-wrapper').html("");
+$('.sidebar-wrapper').append('<ul class="items-list main-list-wrapper"><%= j render partial: 'page', collection: @pages, locals: {project_id: @project.id, title: @title}%></ul>');
+
+$('.main-list-wrapper').nestedSortable(
+        {
+            isTree: true,
+            listType: 'ul',
+            forcePlaceholderSize: true,
+            placeholder: 'placeholder',
+            items: 'li',
+            change: function(){
+                console.log('changed')
+            },
+            stop: function(){
+
+                $.ajax({
+                    url: '/update_positions',
+                    dataType: "script",
+                    data: {data: $('.main-list-wrapper').nestedSortable('toArray'), project_id: project_id}
+                });
+                console.log('stopped')
+            }
+
+        });
+

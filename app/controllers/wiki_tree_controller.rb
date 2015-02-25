@@ -12,10 +12,10 @@ class WikiTreeController < ApplicationController
 
   def update_positions
     sorted_params = prepare_positions_hash
+    @title = Rails.application.routes.recognize_path(params[:path])[:id]
+
     sorted_params.each_pair do |key, val|
       val.each_with_index do |item, index|
-        p item
-        p index
         WikiPage.find(item.to_i).set_list_position(index + 1)
       end
       if key.present?
@@ -24,8 +24,9 @@ class WikiTreeController < ApplicationController
         WikiPage.where(:id => val).update_all(:parent_id => nil)
       end
     end
+    @pages = @project.wiki.pages.where(:parent_id => nil).reorder("position ASC").all
     respond_to do |format|
-        format.json { head :ok }
+        format.js
     end
 
   end

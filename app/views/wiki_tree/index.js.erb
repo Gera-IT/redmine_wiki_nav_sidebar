@@ -21,16 +21,17 @@ $('.main-list-wrapper').nestedSortable(
             placeholder: 'placeholder',
             items: 'li',
             change: function(){
-                console.log('changed')
             },
             stop: function(){
 
                 $.ajax({
                     url: '/update_positions',
-                    dataType: "json",
-                    data: {data: $('.main-list-wrapper').nestedSortable('toArray'), project_id: project_id}
+                    dataType: "script",
+                    data: {data: $('.main-list-wrapper').nestedSortable('toArray'), project_id: project_id, path: window.location.pathname},
+                    success: function(){
+
+                    }
                 });
-                console.log('stopped')
             }
 
         });
