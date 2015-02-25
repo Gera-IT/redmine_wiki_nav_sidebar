@@ -129,6 +129,7 @@ $(function(){
 
         setContentClasses();
 
+
         //setCollapseState();
 
         $(document).on('click', '.main-collapser', function(){
@@ -208,6 +209,13 @@ function getCookie(c_name) {
     }
 }
 
-$(function(){
-    $('.main-list-wrapper').nestedSortable('serialize', {listType: 'ul', items: 'li'});
-});
+
+function fire_update(){
+    console.log('updated');
+}
+
+
+
+
+
+

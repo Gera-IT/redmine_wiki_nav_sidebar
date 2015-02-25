@@ -2,6 +2,7 @@
 # See: http://guides.rubyonrails.org/routing.html
 
 resources :wiki_tree, only: :index
+get '/update_positions', to: "wiki_tree#update_positions"
 # get 'wiki_history', to: "wiki_tree#history"
 #
 # get '/projects/:project_id/wiki/:id/:version/wiki_diff', to: 'wiki_tree#wiki_diff', as: :wiki_diff_page

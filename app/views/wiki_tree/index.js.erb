@@ -1,6 +1,10 @@
 
 <% if Setting.plugin_redmine_wiki_nav_sidebar["enabled_sidebar"] == '1' %>
 
+var project_id = $('form').first().attr('action').replace( /\/projects\//, '' );
+project_id = project_id.replace( /\/search/, '' );
+
+
 $('body').append('<%= j render partial: 'styles' %>');
 
 $('#main').prepend('<div id="left_sidebar"><h3>Wiki Pages<span class="main-collapser" data-collapse-state="<%= j (cookies["collapse-state"] || 'opened') %>" style="font-size: 12px;font-weight: normal;margin-left: 18px;">Collapse/show all</span> </h3><div class="sidebar-wrapper"></div></div>');
@@ -9,9 +13,27 @@ $('#content').append('<div id="left-sidebarHandler"><div id="hideleftSidebarButt
 
 $('.sidebar-wrapper').append('<ul class="items-list main-list-wrapper"><%= j render partial: 'page', collection: @pages, locals: {project_id: @project.id, title: @title}%></ul>');
 
-$(function(){
-    $('.main-list-wrapper').nestedSortable({listType: 'ul', items: 'li'});
-});
+$('.main-list-wrapper').nestedSortable(
+        {
+            isTree: true,
+            listType: 'ul',
+            forcePlaceholderSize: true,
+            placeholder: 'placeholder',
+            items: 'li',
+            change: function(){
+                console.log('changed')
+            },
+            stop: function(){
+
+                $.ajax({
+                    url: '/update_positions',
+                    dataType: "json",
+                    data: {data: $('.main-list-wrapper').nestedSortable('toArray'), project_id: project_id}
+                });
+                console.log('stopped')
+            }
+
+        });
 
 
 <% if cookies["collapse-state"] == "closed" %>

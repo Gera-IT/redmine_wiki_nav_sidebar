@@ -1,5 +1,6 @@
 require 'assets_hook'
 require 'redmine'
+require 'wiki_pages_patch'
 
 Redmine::Plugin.register :redmine_wiki_nav_sidebar do
   name 'Redmine Wiki nav sidebar plugin'
@@ -9,6 +10,11 @@ Redmine::Plugin.register :redmine_wiki_nav_sidebar do
   url 'https://github.com/Gera-IT/redmine_wiki_nav_sidebar'
   author_url 'https://github.com/avdept'
   settings :default => {'enabled_sidebar' => true}, :partial => 'settings/sidebar_setting'
+end
+
+ActionDispatch::Callbacks.to_prepare do
+
+  WikiPage.send(:include, WikiPagesPatch)
 end
 
 class AssetsFilesHook < Redmine::Hook::ViewListener

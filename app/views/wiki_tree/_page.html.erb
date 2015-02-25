@@ -22,8 +22,9 @@
   <% end %>
 <%= link_to truncate(page.pretty_title, lenth:50, separator: " ", omission:"..."), project_wiki_page_path(@project, page.title) , {class: "wiki-link #{'current_wiki_page' if page.title == @title}", data: {:parent => page.id}}%>
   <% if page.children.present? %>
+      <div></div>
       <ul class="nest-wrapper-<%= page.id %> <%= css_class || 'opened' %> items-list">
-        <%= render partial: 'page', collection: page.children, as: :page, locals: {nest_level: nest_level, title: title} %>
+        <%= render partial: 'page', collection: page.children.reorder('position ASC'), as: :page, locals: {nest_level: nest_level, title: title} %>
         <br/>
       </ul>
   <% end %>
