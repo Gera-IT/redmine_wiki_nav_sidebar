@@ -20,6 +20,8 @@ class WikiTreeController < ApplicationController
       end
       if key.present?
         WikiPage.where(:id => val).update_all(:parent_id => key.to_i)
+      else
+        WikiPage.where(:id => val).update_all(:parent_id => nil)
       end
     end
     respond_to do |format|

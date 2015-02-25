@@ -22,6 +22,13 @@
 .items-list{
     list-style-type:none;
     list-style-image:none;
+    padding:0;
+
+}
+.items-list ul {
+    list-style-type:none;
+    list-style-image:none;
+    padding:0;
 }
 #hideleftSidebarButton:hover {
     cursor: pointer;
